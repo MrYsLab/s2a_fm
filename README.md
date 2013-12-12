@@ -13,6 +13,8 @@ create?
 s2a_fm is a Scratch hardware extension written in Python allowing Scratch and an Arduino
 micro-controller to communicate seamlessly.
 
+Make sure you get the latest version of the Scratch Off-Line editor.
+
 Known Issues
 ------------
 
