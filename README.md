@@ -23,3 +23,10 @@ and pressing the green start flag again.
 
 Workarounds: 1. Close Scratch and reopen it.
              2. Click the When (Green Flag) Clicked block in the editor.
+             
+Wiring Diagrams for Examples
+----------------------------
+             
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/LED_EXAMPLE.png)             
+
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/pot1.png)             
