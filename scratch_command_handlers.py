@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
 import logging
+import datetime
 
 class ScratchCommandHandlers:
     """
@@ -41,8 +42,14 @@ class ScratchCommandHandlers:
     digital_poll_list = []
     analog_poll_list = []
 
+    # detected pin capability map
+    pin_map = {}
+
     # instance variable for PyMata
     firmata = None
+
+    # debug state - 0 == off and 1 == on
+    debug = 0
 
     # base report string to be modified in response to a poll command
     # PIN and VALUE will be replaced with pin number and the current value for the pin
@@ -62,8 +69,7 @@ class ScratchCommandHandlers:
     CMD_TONE_FREQ = 2  # frequency for tone command
     CMD_TONE_DURATION = 3  # tone duration
     CMD_SERVO_DEGREES = 2  # number of degrees for servo position
-
-
+    CMD_DEBUG = 1 # debugger on or off
 
 
 
@@ -79,6 +85,7 @@ class ScratchCommandHandlers:
         self.total_pins_discovered = total_pins_discovered
         self.number_of_analog_pins_discovered = number_of_analog_pins_discovered
         self.first_poll_received = False
+        self.debug = 0
 
 
         # Create a pin list for poll data based on the total number of pins( digital table)
@@ -100,6 +107,17 @@ class ScratchCommandHandlers:
         @return: String to be returned to Scratch via HTTP
         """
         method = self.command_dict.get( command[0])
+        if command[0] != "poll":
+            # turn on debug logging if requested
+            if self.debug == 'On':
+                debug_string = "DEBUG: "
+                debug_string += str(datetime.datetime.now())
+                debug_string += ": "
+                for data in command:
+                    debug_string += "".join(map(str, data))
+                    debug_string += ' '
+                logging.debug(debug_string)
+                print debug_string
         return method(self, command)
 
     #noinspection PyUnusedLocal
@@ -183,6 +201,7 @@ class ScratchCommandHandlers:
         for x in range(self.number_of_analog_pins_discovered):
             self.analog_poll_list[x] = self.firmata.IGNORE
         self.firmata.reset()
+        self.debug = 0
         return 'okay'
 
     def digital_pin_mode(self, command):
@@ -199,47 +218,87 @@ class ScratchCommandHandlers:
 
         pin = int(command[self.CMD_PIN_ENABLE_DISABLE])
 
-        #test for a valid pin number
+        # test for a valid pin number
         if pin >= self.total_pins_discovered:
             logging.debug('digital_pin_mode: pin %d exceeds number of pins on board' % pin)
             print 'digital_pin_mode: pin %d exceeds number of pins on board' % pin
             return 'okay'
+        # ok pin is range, but make
         else:
             # now test for enable or disable
             if command[self.CMD_ENABLE_DISABLE] == 'Enable':
                 # choices will be input or some output mode
                 if command[self.CMD_DIGITAL_MODE] == 'Input':
-                    # set the digital poll list for the pin
-                    self.digital_poll_list[pin] = self.firmata.INPUT
-                    # send the set request to the Arduino
-                    self.firmata.set_pin_mode( pin, self.firmata.INPUT, self.firmata.DIGITAL)
+                    if self.valid_digital_pin_mode_type(pin, self.firmata.INPUT):
+                        # set the digital poll list for the pin
+                        self.digital_poll_list[pin] = self.firmata.INPUT
+                        # send the set request to the Arduino
+                        self.firmata.set_pin_mode( pin, self.firmata.INPUT, self.firmata.DIGITAL)
+                    else:
+                        logging.debug('digital_pin_mode: Pin %d does not support INPUT mode'% pin)
+                        print 'digital_pin_mode: Pin %d does not support INPUT mode '% pin
+                        return 'okay'
                 else:
                     # an output mode, so just clear the poll bit
                     if command[self.CMD_DIGITAL_MODE] == 'Output':
-                        self.digital_poll_list[pin] = self.firmata.OUTPUT
-                        self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)  
+                        if self.valid_digital_pin_mode_type(pin, self.firmata.OUTPUT):
+                            self.digital_poll_list[pin] = self.firmata.OUTPUT
+                            self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
+                        else:
+                            logging.debug('digital_pin_mode: Pin %d does not support OUTPUT mode' % pin)
+                            print 'digital_pin_mode: Pin %d does not support OUTPUT mode' % pin
+                            return 'okay'
                     elif command[self.CMD_DIGITAL_MODE] == 'PWM':
-                        self.digital_poll_list[pin] = self.firmata.PWM
-                        self.firmata.set_pin_mode( pin, self.firmata.PWM, self.firmata.DIGITAL)  
+                        if self.valid_digital_pin_mode_type(pin, self.firmata.PWM):
+                            self.digital_poll_list[pin] = self.firmata.PWM
+                            self.firmata.set_pin_mode( pin, self.firmata.PWM, self.firmata.DIGITAL)
+                        else:
+                            logging.debug('digital_pin_mode: Pin %d does not support PWM mode' % pin)
+                            print 'digital_pin_mode: Pin %d does not support PWM mode' % pin
+                            return 'okay'
                     elif command[self.CMD_DIGITAL_MODE] == 'Tone':
-                        self.digital_poll_list[pin] = self.digital_poll_list[pin] = self.firmata.TONE_TONE
-                        self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)  
+                        # Tone can be on any pin so we look for OUTPUT
+                        if self.valid_digital_pin_mode_type(pin, self.firmata.OUTPUT):
+                            self.digital_poll_list[pin] = self.digital_poll_list[pin] = self.firmata.TONE_TONE
+                            self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
+                        else:
+                            logging.debug('digital_pin_mode: Pin %d does not support TONE mode' % pin)
+                            print 'digital_pin_mode: Pin %d does not support TONE mode' % pin
+                            return 'okay'
                     elif command[self.CMD_DIGITAL_MODE] == 'Servo':
-                        self.digital_poll_list[pin] = self.firmata.SERVO
-                        self.firmata.servo_config(pin)  
+                        if self.valid_digital_pin_mode_type(pin, self.firmata.SERVO):
+                            self.digital_poll_list[pin] = self.firmata.SERVO
+                            self.firmata.servo_config(pin)
+                        else:
+                            logging.debug('digital_pin_mode: Pin %d does not support SERVO mode' % pin)
+                            print 'digital_pin_mode: Pin %d does not support SERVO mode' % pin
+                            return 'okay'
                     else:
-                        return '_problem Unknown Digital Pin Mode'
+                        logging.debug('digital_pin_mode: Unknown output mode')
+                        print 'digital_pin_mode: Unknown output mode'
+                        return 'okay'
             if command[self.CMD_ENABLE_DISABLE] == 'Disable':
                 # disable pin of any type by setting it to IGNORE in the table
                 self.digital_poll_list[pin] = self.firmata.IGNORE
                 # this only applies to Input pins. For all other pins we leave the poll list as is
                 if command[self.CMD_DIGITAL_MODE] == 'Input':
                     # send a disable reporting message
-                    self.firmata.disable_digital_reporting(pin)  
-
-
+                    self.firmata.disable_digital_reporting(pin)
             # normal http return for commands
             return 'okay'
+
+    def valid_digital_pin_mode_type(self, pin, pin_mode):
+        """
+        This is a utility method to determine if the pin supports the pin mode
+        @param pin: Pin number
+        @param pin_mode: Pin Mode
+        @return: True if the mode is supported or False if it not supported.
+        """
+        pin_modes = self.pin_map[pin]
+        if pin_mode in pin_modes:
+            return True
+        else:
+            return False
 
 
     def analog_pin_mode(self, command):
@@ -381,7 +440,7 @@ class ScratchCommandHandlers:
         """
         This method will force tone to be off.
         @param command: Command and all possible parameters in list form
-        @return: okay or _problem
+        @return: okay
         """
         if command[self.CMD_PIN] == 'PIN':
             logging.debug('tone_off: The pin number must be set to a numerical value')
@@ -400,6 +459,15 @@ class ScratchCommandHandlers:
             logging.debug('tone_off: Pin %d was not enabled as TONE.' % pin)
             return 'okay'
 
+    def debug_control(self, command):
+        """
+        This method controls command block debug logging
+        @param command: Either On or Off
+        @return: okay
+        """
+        self.debug = command[self.CMD_DEBUG]
+        return 'okay'
+
     def set_servo_position(self, command):
         # check to make sure pin was configured for servo
         """
@@ -407,7 +475,7 @@ class ScratchCommandHandlers:
         previously configured for Servo operation.
         A maximum of 180 degrees is allowed
         @param command: Command and all possible parameters in list form
-        @return: okay or _problem
+        @return: okay
         """
         if command[self.CMD_PIN] == 'PIN':
             logging.debug('servo_position: The pin number must be set to a numerical value')
@@ -435,7 +503,8 @@ class ScratchCommandHandlers:
                         'digital_pin_mode': digital_pin_mode,  "analog_pin_mode": analog_pin_mode,
                         "digital_write": digital_write, "analog_write": analog_write,
                         "play_tone": play_tone, "tone_off": tone_off,
-                        "set_servo_position": set_servo_position, "poll": poll
+                        "set_servo_position": set_servo_position, "poll": poll,
+                        "debugger": debug_control
                         }
 
 

@@ -29,6 +29,7 @@ import logging
 from PyMata.pymata import PyMata
 import scratch_http_server
 from scratch_command_handlers import ScratchCommandHandlers
+import time
 
 
 #noinspection PyBroadException
@@ -52,8 +53,8 @@ def s2a_fm():
 
     # turn on logging
     logging.basicConfig(filename='./log/s2a_fm_debugging.log', filemode='w', level=logging.DEBUG)
-    logging.info('s2a_fm version 1.0    Copyright(C) 2013 Alan Yorinks    All Rights Reserved ')
-    print 's2a_fm version 1.0    Copyright(C) 2013 Alan Yorinks    All Rights Reserved '
+    logging.info('s2a_fm version 1.1    Copyright(C) 2013 Alan Yorinks    All Rights Reserved ')
+    print 's2a_fm version 1.1   Copyright(C) 2013 Alan Yorinks    All Rights Reserved '
 
     # get the com_port from the command line or default if none given
     # if user specified the com port on the command line, use that when invoking PyMata,
@@ -63,8 +64,6 @@ def s2a_fm():
     else:
         com_port = '/dev/ttyACM0'
     logging.info('com port = %s' % com_port)
-
-
 
     try:
         # instantiate PyMata
@@ -83,6 +82,9 @@ def s2a_fm():
 
     capability_map = firmata.get_analog_mapping_request_results()
 
+    firmata.capability_query()
+    print "Please wait for Total Arduino Pin Discovery to complete. This can take up to 30 additional seconds."
+
     # count the pins
     for pin in capability_map:
             total_pins_discovered += 1
@@ -93,9 +95,39 @@ def s2a_fm():
     # log the number of pins found
     logging.info('%d Total Pins and %d Analog Pins Found' % (total_pins_discovered,
                                                      number_of_analog_pins_discovered))
+
     # instantiate the command handler
     scratch_command_handler = ScratchCommandHandlers(firmata, com_port, total_pins_discovered,
                                                      number_of_analog_pins_discovered)
+
+    # wait for a maximum of 30 seconds to retrieve the Arduino capability query
+    start_time = time.time()
+
+    pin_capability = []
+    pin_capability = firmata.get_capability_query_results()
+    while pin_capability == []:
+        if time.time() - start_time > 30:
+            print ''
+            print "Could not determine pin capability - exiting."
+            firmata.close()
+            # keep sending out a capability query until there is a response
+        pin_capability = firmata.get_capability_query_results()
+        time.sleep(.1)
+
+    # we've got the capability, now build a dictionary with pin as the key and a list of all the capabilities
+    # for the pin as the key's value
+    pin_list = []
+    total_pins_discovered = 0
+    for entry in pin_capability:
+        # bump up pin counter each time IGNORE is found
+        if entry == firmata.IGNORE:
+            scratch_command_handler.pin_map[total_pins_discovered] = pin_list
+            total_pins_discovered += 1
+            pin_list = []
+        else:
+            pin_list.append(entry)
+
+    print "Arduino Total Pin Discovery completed in %d seconds" % (int(time.time() - start_time))
 
     try:
         # start the server passing it the handle to PyMata and the command handler.

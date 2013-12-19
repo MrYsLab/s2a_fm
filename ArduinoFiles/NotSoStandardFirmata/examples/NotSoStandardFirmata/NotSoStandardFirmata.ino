@@ -580,6 +580,8 @@ void sysexCallback(byte command, byte argc, byte *argv)
        }
        else if (toneCommand == TONE_NO_TONE) {
             noTone(pin);
+
+      break ;
      }
    }
 }

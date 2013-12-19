@@ -64,6 +64,12 @@
             "Read Analog Pin (A) %n",
             "analog_read",
             "PIN"
+        ],
+        [
+            "",
+            "Debugger %m.off_on",
+            "debugger",
+            "Off"
         ]
     ],
     "menus": {
@@ -81,6 +87,10 @@
         "high_low": [
             "0",
             "1"
+        ],
+        "off_on": [
+            "Off",
+            "On"
         ]
     }
 }

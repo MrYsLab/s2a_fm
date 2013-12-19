@@ -15,6 +15,14 @@ micro-controller to communicate seamlessly.
 
 Make sure you get the latest version of the Scratch Off-Line editor.
 
+Version 1.1 December 19, 2013
+-----------------------------
+
+New Features for 1.1:
+1. When enabling a digital pin, the pin capabilty is verified for the requested mode.
+2. A new Scratch debugger command block has been added to help debug Scratch scripts.
+
+
 Known Issues
 ------------
 
