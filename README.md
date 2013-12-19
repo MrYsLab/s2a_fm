@@ -19,22 +19,36 @@ Version 1.1 December 19, 2013
 -----------------------------
 
 New Features for 1.1:
+
 1. When enabling a digital pin, the pin capabilty is verified for the requested mode.
+
 2. A new Scratch debugger command block has been added to help debug Scratch scripts.
 
 
-Known Issues
+Known Scratch 2.0 Issues
 ------------
 
-The current version of Scratch 2.0 does not properly restart a Scratch program when clicking the red stop button
+A.  The current version of Scratch 2.0 does not properly restart a Scratch program when clicking the red stop button
 and pressing the green start flag again.
 
-Workarounds: 1. Close Scratch and reopen it.
-             2. Click the When (Green Flag) Clicked block in the editor.
-             
+             Workarounds: 1. Close Scratch and reopen it.
+                          2. Click the When (Green Flag) Clicked block in the editor.
+
+B. Placing a Scratch Extension Command Block in a loop construct causes the loop to execute once and then abort.
+
+             Workaround: Either write scripts in a linear fashion or use broadcast messages to
+             execute the extension command block.
+
+Scratch s2a_fm Extension Blocks
+-------------------------------
+
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/scratch_blocks.png)
+
+
 Wiring Diagrams for Examples
 ----------------------------
-             
-![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/LED_EXAMPLE.png)             
 
-![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/pot1.png)             
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/LED_EXAMPLE.png)
+
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/pot1.png)
+
