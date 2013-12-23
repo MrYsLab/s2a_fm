@@ -25,7 +25,7 @@ New Feature for 1.2 (contributed by Sjoerd Dirk Meijer, fromScratchEd.nl):
 
 		translate every second line inside a block
 
-			don't change the sequence of the variables on these lines!!
+			don't change the sequence of the variables on these lines!
 
 		translate the variables, except PIN, VAL and words with underscores ('_')
 
