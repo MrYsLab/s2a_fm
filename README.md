@@ -22,10 +22,15 @@ New Feature for 1.2 (contributed by Sjoerd Dirk Meijer, fromScratchEd.nl):
 
 - Language support
 	1. copy s2a_fm.s2e to a new file, i.e. s2a_fm_NL.s2e
+
 		translate every second line inside a block
+
 			don't change the sequence of the variables on these lines!!
+
 		translate the variables, except PIN, VAL and words with underscores ('_')
+
 	2. scratch_command_handlers.py: add your translations to the variables starting with 'ln_', i.e.
+
 		ln_ENABLE = ['Enable', 'aan', '{your translation}']	
 
 Version 1.1 December 19, 2013
