@@ -6,6 +6,8 @@ Created on Wed Nov  25 13:17:15 2013
 @author: Alan Yorinks
 Copyright (c) 2013 Alan Yorinks All right reserved.
 
+@co-author: Sjoerd Dirk Meijer, fromScratchEd.nl (language support)
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
@@ -34,6 +36,18 @@ class ScratchCommandHandlers:
     updated to contain the method. Command names must be the same in the json .s2e Scratch
     descriptor file.
     """
+    #Add your own translation to this list and make a new s2a_fm.s2e file with your translation
+    ln_languages = ['English', 'Dutch (NL)'] #just for reference
+    ln_ENABLE = ['Enable', 'aan']
+    ln_DISABLE = ['Disable', 'uit']
+    ln_INPUT = ['Input', 'ingang']
+    ln_OUTPUT = ['Output', 'uitgang']
+    ln_PWM = ['PWM', 'PWM']
+    ln_SERVO = ['Servo' , 'servo']
+    ln_TONE = ['Tone', 'toon']
+    ln_OFF = ['Off', 'uitgeschakeld']
+    ln_ON = ['On', 'ingeschakeld']
+
     # pin counts for the board
     total_pins_discovered = 0
     number_of_analog_pins_discovered = 0
@@ -71,7 +85,30 @@ class ScratchCommandHandlers:
     CMD_SERVO_DEGREES = 2  # number of degrees for servo position
     CMD_DEBUG = 1 # debugger on or off
 
+    def check_CMD_ENABLE_DISABLE(self, command):
+        if command in self.ln_ENABLE:
+            return 'Enable'
+        if command in self.ln_DISABLE:
+            return 'Disable'
 
+    def check_CMD_DIGITAL_MODE(self, command):
+        if command in self.ln_INPUT:
+            return 'Input'
+        if command in self.ln_OUTPUT:
+            return 'Output'
+        if command in self.ln_PWM:
+            return 'PWM'
+        if command in self.ln_SERVO:
+            return 'Servo'
+        if command in self.ln_TONE:
+            return 'Tone'
+
+    def check_DEBUG(self, command):
+        if command in self.ln_OFF:
+            return 'Off'
+        if command in self.ln_ON:
+            return 'On'
+    
 
     def __init__(self, firmata, com_port, total_pins_discovered, number_of_analog_pins_discovered):
         """
@@ -226,9 +263,10 @@ class ScratchCommandHandlers:
         # ok pin is range, but make
         else:
             # now test for enable or disable
-            if command[self.CMD_ENABLE_DISABLE] == 'Enable':
+
+            if self.check_CMD_ENABLE_DISABLE(command[self.CMD_ENABLE_DISABLE]) == 'Enable':
                 # choices will be input or some output mode
-                if command[self.CMD_DIGITAL_MODE] == 'Input':
+                if self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'Input':
                     if self.valid_digital_pin_mode_type(pin, self.firmata.INPUT):
                         # set the digital poll list for the pin
                         self.digital_poll_list[pin] = self.firmata.INPUT
@@ -240,7 +278,7 @@ class ScratchCommandHandlers:
                         return 'okay'
                 else:
                     # an output mode, so just clear the poll bit
-                    if command[self.CMD_DIGITAL_MODE] == 'Output':
+                    if self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'Output':
                         if self.valid_digital_pin_mode_type(pin, self.firmata.OUTPUT):
                             self.digital_poll_list[pin] = self.firmata.OUTPUT
                             self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
@@ -248,7 +286,7 @@ class ScratchCommandHandlers:
                             logging.debug('digital_pin_mode: Pin %d does not support OUTPUT mode' % pin)
                             print 'digital_pin_mode: Pin %d does not support OUTPUT mode' % pin
                             return 'okay'
-                    elif command[self.CMD_DIGITAL_MODE] == 'PWM':
+                    elif self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'PWM':
                         if self.valid_digital_pin_mode_type(pin, self.firmata.PWM):
                             self.digital_poll_list[pin] = self.firmata.PWM
                             self.firmata.set_pin_mode( pin, self.firmata.PWM, self.firmata.DIGITAL)
@@ -256,7 +294,7 @@ class ScratchCommandHandlers:
                             logging.debug('digital_pin_mode: Pin %d does not support PWM mode' % pin)
                             print 'digital_pin_mode: Pin %d does not support PWM mode' % pin
                             return 'okay'
-                    elif command[self.CMD_DIGITAL_MODE] == 'Tone':
+                    elif self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'Tone':
                         # Tone can be on any pin so we look for OUTPUT
                         if self.valid_digital_pin_mode_type(pin, self.firmata.OUTPUT):
                             self.digital_poll_list[pin] = self.digital_poll_list[pin] = self.firmata.TONE_TONE
@@ -265,7 +303,7 @@ class ScratchCommandHandlers:
                             logging.debug('digital_pin_mode: Pin %d does not support TONE mode' % pin)
                             print 'digital_pin_mode: Pin %d does not support TONE mode' % pin
                             return 'okay'
-                    elif command[self.CMD_DIGITAL_MODE] == 'Servo':
+                    elif self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'Servo':
                         if self.valid_digital_pin_mode_type(pin, self.firmata.SERVO):
                             self.digital_poll_list[pin] = self.firmata.SERVO
                             self.firmata.servo_config(pin)
@@ -277,11 +315,11 @@ class ScratchCommandHandlers:
                         logging.debug('digital_pin_mode: Unknown output mode')
                         print 'digital_pin_mode: Unknown output mode'
                         return 'okay'
-            if command[self.CMD_ENABLE_DISABLE] == 'Disable':
+            if self.check_CMD_ENABLE_DISABLE(command[self.CMD_ENABLE_DISABLE]) == 'Disable':
                 # disable pin of any type by setting it to IGNORE in the table
                 self.digital_poll_list[pin] = self.firmata.IGNORE
                 # this only applies to Input pins. For all other pins we leave the poll list as is
-                if command[self.CMD_DIGITAL_MODE] == 'Input':
+                if self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'Input':
                     # send a disable reporting message
                     self.firmata.disable_digital_reporting(pin)
             # normal http return for commands
@@ -324,7 +362,7 @@ class ScratchCommandHandlers:
             return 'okay'
         else:
             # now test for enable or disable
-            if command[self.CMD_ENABLE_DISABLE] == 'Enable':
+            if self.check_CMD_ENABLE_DISABLE(command[self.CMD_ENABLE_DISABLE]) == 'Enable':
                 # enable the analog pin
                 self.analog_poll_list[pin] = self.firmata.INPUT
                 self.firmata.set_pin_mode( pin, self.firmata.INPUT, self.firmata.ANALOG)  
@@ -465,7 +503,7 @@ class ScratchCommandHandlers:
         @param command: Either On or Off
         @return: okay
         """
-        self.debug = command[self.CMD_DEBUG]
+        self.debug = self.check_DEBUG(command[self.CMD_DEBUG])
         return 'okay'
 
     def set_servo_position(self, command):
@@ -506,5 +544,3 @@ class ScratchCommandHandlers:
                         "set_servo_position": set_servo_position, "poll": poll,
                         "debugger": debug_control
                         }
-
-
