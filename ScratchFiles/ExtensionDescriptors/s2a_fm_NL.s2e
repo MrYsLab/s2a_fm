@@ -16,7 +16,7 @@
 			"Zet %m.pin_state: Analoge pin (A) %n als ingang",
             "analog_pin_mode",
             "aan",
-            "Pin"
+            "PIN"
         ],
         [
             "",
