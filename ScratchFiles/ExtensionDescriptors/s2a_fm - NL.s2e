@@ -5,18 +5,18 @@
     "blockSpecs": [
         [
             " ",
-			"Digitale pin %n : zet %m.digital_pin_mode %m.pin_state",
+			"Zet %m.pin_state : Digitale pin %n als %m.digital_pin_mode",
             "digital_pin_mode",
+            "aan",
             "PIN",
-            "ingang",
-            "aan"
+            "ingang"
         ],
         [
             " ",
-			"Analoge pin (A) %n : zet ingang %m.pin_state",
+			"Zet %m.pin_state: Analoge pin (A) %n als ingang",
             "analog_pin_mode",
-            "Pin",
-            "aan"
+            "aan",
+            "Pin"
         ],
         [
             "",
