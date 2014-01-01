@@ -3,7 +3,7 @@
 Created on Mon Nov 25 14:45:49 2013
 
 @author: Alan Yorinks
-Copyright (c) 2013 Alan Yorinks All right reserved.
+Copyright (c) 2013-14 Alan Yorinks All right reserved.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -76,7 +76,6 @@ class GetHandler(BaseHTTPRequestHandler):
 
         # skip over the / in the command
         cmd = self.path[1:]
-
         # create a list containing the command and all of its parameters
         cmd_list = split(cmd, '/')
 
@@ -93,13 +92,17 @@ class GetHandler(BaseHTTPRequestHandler):
         """
         This method sends Scratch an HTTP response to an HTTP GET command.
         """
+
         crlf = "\r\n"
+        # http_response = str(response + crlf)
         http_response = "HTTP/1.1 200 OK" + crlf
         http_response += "Content-Type: text/html; charset=ISO-8859-1" + crlf
+        http_response += "Content-Length" + str(len(response)) + crlf
         http_response += "Access-Control-Allow-Origin: *" + crlf
         http_response += crlf
-        # add the response to the nonsense above
-        http_response += str(response + crlf)
+        #add the response to the nonsense above
+        if response != 'okay':
+            http_response += str(response + crlf)
         # send it out the door to Scratch
         self.wfile.write(http_response)
 
@@ -112,9 +115,9 @@ def start_server(firmata, command_handler):
     GetHandler.set_items(firmata, command_handler)
     try:
         server = HTTPServer(('localhost', 50209), GetHandler)
-        print 'Starting Scratch HTTP Server!'
+        print 'Starting HTTP Server!'
         print 'Use <Ctrl-C> to exit the extension\n'
-        print 'Waiting for Scratch handshake ....'
+        print 'Please start Scratch or Snap!'
     except Exception:
         logging.debug('Exception in scratch_http_server.py: HTTP Socket may already be in use - restart Scratch')
         print 'HTTP Socket may already be in use - restart Scratch'

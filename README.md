@@ -5,15 +5,31 @@ Arduino users! Would you like to configure and control your Arduino micro-contro
 to write a single line of Arduino sketch code and at the same time have access to a graphical user
 interface?
 
-Scratch programmers! Would you like to control and communicate with an Arduino board using
+Scratch and Snap! programmers! Would you like to control and communicate with an Arduino board using
 Scratch? Imagine, using Scratch to control physical devices such as LEDs, motors, and relays while
 monitoring devices, such as temperature sensors, potentiometers, and light sensors. What would you
 create?
 
-s2a_fm is a Scratch hardware extension written in Python allowing Scratch and an Arduino
+s2a_fm is a Scratch/Snap! hardware extension written in Python allowing Scratch or Snap! and an Arduino
 micro-controller to communicate seamlessly.
 
-Make sure you get the latest version of the Scratch Off-Line editor.
+Make sure you get the latest version of the Scratch Off-Line editor if you are using Scratch.
+
+At this point in time, Snap! has a more stable hardware interface than Scratch, so it is recommended for use.
+
+
+Version 1.2 Jan 1, 2014
+-----------------------
+New Features for 1.2:
+
+1. Support for Snap! 4.0 provided.
+
+2. Support for up to 4 simultaneous HC-SR04 type "Ping" Sensors.
+(This requires using PyMata version 1.54 or greater and the FirmataPlus Arduino sketch supplied with PyMata 1.54).
+
+3. Dutch translation for the Scratch/Snap! Block Text included (Thanks to Sjoerd Dirk Meijer).
+
+4. Provision to translate Scratch/Snap! Block Text to any language.
 
 Version 1.1 December 19, 2013
 -----------------------------
@@ -24,8 +40,12 @@ New Features for 1.1:
 
 2. A new Scratch debugger command block has been added to help debug Scratch scripts.
 
+Known Snap! 4.0 Extension Issues
+----------------------
+None.
 
-Known Scratch 2.0 Issues
+
+Known Scratch 2.0 Extension Issues
 ------------
 
 A.  The current version of Scratch 2.0 does not properly restart a Scratch program when clicking the red stop button
@@ -44,6 +64,9 @@ Scratch s2a_fm Extension Blocks
 
 ![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/scratch_blocks.png)
 
+Snap! s2a_fm Extension Blocks
+-----------------------------
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/snap_blocks.png)
 
 Wiring Diagrams for Examples
 ----------------------------

@@ -82,7 +82,8 @@
             "Output",
             "PWM",
             "Servo",
-            "Tone"
+            "Tone",
+            "SONAR"
         ],
         "high_low": [
             "0",

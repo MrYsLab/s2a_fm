@@ -6,7 +6,7 @@
 Created on Wed Nov  25 13:17:15 2013
 
 @author: Alan Yorinks
-Copyright (c) 2013 Alan Yorinks All right reserved.
+Copyright (c) 2013-14 Alan Yorinks All right reserved.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -53,8 +53,8 @@ def s2a_fm():
 
     # turn on logging
     logging.basicConfig(filename='./log/s2a_fm_debugging.log', filemode='w', level=logging.DEBUG)
-    logging.info('s2a_fm version 1.1    Copyright(C) 2013 Alan Yorinks    All Rights Reserved ')
-    print 's2a_fm version 1.1   Copyright(C) 2013 Alan Yorinks    All Rights Reserved '
+    logging.info('s2a_fm version 1.2    Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved ')
+    print 's2a_fm version 1.2   Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved '
 
     # get the com_port from the command line or default if none given
     # if user specified the com port on the command line, use that when invoking PyMata,
@@ -68,8 +68,7 @@ def s2a_fm():
     try:
         # instantiate PyMata
         firmata = PyMata(com_port)  # pragma: no cover
-    except:
-        Exception
+    except Exception:
         print 'Could not instantiate PyMata - is your Arduino plugged in?'
         logging.exception('Could not instantiate PyMata - is your Arduino plugged in?')
         logging.debug("Exiting s2a_fm")
@@ -103,9 +102,8 @@ def s2a_fm():
     # wait for a maximum of 30 seconds to retrieve the Arduino capability query
     start_time = time.time()
 
-    pin_capability = []
     pin_capability = firmata.get_capability_query_results()
-    while pin_capability == []:
+    while not pin_capability:
         if time.time() - start_time > 30:
             print ''
             print "Could not determine pin capability - exiting."
