@@ -111,6 +111,7 @@ def s2a_fm():
             # keep sending out a capability query until there is a response
         pin_capability = firmata.get_capability_query_results()
         time.sleep(.1)
+        print pin_capability
 
     # we've got the capability, now build a dictionary with pin as the key and a list of all the capabilities
     # for the pin as the key's value

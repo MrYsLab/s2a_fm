@@ -115,6 +115,7 @@ def start_server(firmata, command_handler):
     GetHandler.set_items(firmata, command_handler)
     try:
         server = HTTPServer(('localhost', 50209), GetHandler)
+        #server = HTTPServer(('', 50209), GetHandler)
         print 'Starting HTTP Server!'
         print 'Use <Ctrl-C> to exit the extension\n'
         print 'Please start Scratch or Snap!'
