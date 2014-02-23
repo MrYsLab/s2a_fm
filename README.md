@@ -17,6 +17,15 @@ Make sure you get the latest version of the Scratch Off-Line editor if you are u
 
 At this point in time, Snap! has a more stable hardware interface than Scratch, so it is recommended for use.
 
+Version 1.3 Feb 23, 2014
+------------------------
+New Features for 1.3
+
+1. Support for the Snap!Mobile Physical Computing Project
+
+2. Spanish Translation of Block Text and a Spanish Tutorial provided courtesy of Professor
+José Manuel Ruiz
+
 
 Version 1.2 Jan 1, 2014
 -----------------------
