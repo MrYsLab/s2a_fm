@@ -21,7 +21,7 @@ Version 1.3 Feb 23, 2014
 ------------------------
 New Features for 1.3
 
-1. Support for the Snap!Mobile Physical Computing Project
+1. Support for the upcoming Snap!Mobile Physical Computing Project in "Instructables"
 
 2. Spanish Translation of Block Text and a Spanish Tutorial provided courtesy of Professor
 José Manuel Ruiz
