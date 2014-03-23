@@ -1,0 +1,97 @@
+{
+    "extensionName": "Scratch pour Arduino",
+    "extensionPort": 50209,
+    "url": "https://github.com/MrYsLab/PyMata",
+    "blockSpecs": [
+        [
+            " ",
+            "%m.pin_state la broche Digital %n comme une %m.digital_pin_mode",
+            "digital_pin_mode",
+            "Activer",
+            "PIN",
+            "entrée."
+        ],
+        [
+            " ",
+            "%m.pin_state la broche Analogique A%n  comme une entrée",
+            "analog_pin_mode",
+            "Activer",
+            "PIN"
+        ],
+        [
+            "",
+            "Mettre l'état logique de la broche Digital %n à %m.high_low",
+            "digital_write",
+            "PIN",
+            0
+        ],
+        [
+            "",
+            "Ecrire sur la broche PWM %n la valeur %n",
+            "analog_write",
+            "PIN",
+            "VAL"
+        ],
+        [
+            "",
+            "Jouer le son sur la broche %n , fréquence (Hz) : %n , durée (ms) : %n",
+            "play_tone",
+            "PIN",
+            1000,
+            500
+        ],
+        [
+            "",
+            "Arrêter le son sur la broche : %n",
+            "tone_off",
+            "PIN"
+        ],
+        [
+            "",
+            "Tourner le servo-moteur sur la broche %n de : %n degrés",
+            "set_servo_position",
+            "PIN",
+            90
+        ],
+        [
+            "r",
+            "l'état logique de la broche Digital %n",
+            "digital_read",
+            "PIN"
+        ],
+        [
+            "r",
+            "la valeur sur la broche Analogique A%n",
+            "analog_read",
+            "PIN"
+        ],
+        [
+            "",
+            "Debugger %m.off_on",
+            "debugger",
+            "Arrêt"
+        ]
+    ],
+    "menus": {
+        "pin_state": [
+            "Activer",
+            "Désactiver"
+        ],
+        "digital_pin_mode": [
+            "entrée.",
+            "sortie.",
+            "impulsion PWM.",
+            "rotation Servo-moteur.",
+            "sortie Son.",
+            "mesure Sonar."
+        ],
+        "high_low": [
+            "0",
+            "1"
+        ],
+        "off_on": [
+            "Arrêt",
+            "Marche"
+        ]
+    }
+}

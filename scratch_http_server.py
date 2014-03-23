@@ -81,9 +81,19 @@ class GetHandler(BaseHTTPRequestHandler):
 
         # get the command handler method for the command and call the handler
         # cmd_list[0] contains the command. look up the command method
+
         s = self.command_handler.do_command(cmd_list)
 
-        self.send_resp(s)
+
+        # if pin was not enabled for reporter block, a "NoneType" can be returned by the command_handler
+        if (s is None) or (len(s) == 0):
+
+            err_statement = ("do_GET: Do you have all active pins enabled? " + str(cmd_list))
+            logging.info(err_statement)
+            print err_statement
+            return
+        else:
+            self.send_resp(s)
 
 
     # we can't use the standard send_response since we don't conform to its
@@ -115,7 +125,6 @@ def start_server(firmata, command_handler):
     GetHandler.set_items(firmata, command_handler)
     try:
         server = HTTPServer(('localhost', 50209), GetHandler)
-        #server = HTTPServer(('', 50209), GetHandler)
         print 'Starting HTTP Server!'
         print 'Use <Ctrl-C> to exit the extension\n'
         print 'Please start Scratch or Snap!'

@@ -333,7 +333,7 @@ class ScratchCommandHandlers:
                             return 'okay'
                     else:
                         logging.debug('digital_pin_mode: Unknown output mode %s' % command[self.CMD_DIGITAL_MODE])
-                        print 'digital_pin_mode: Unknown output mode mode %s' % command[self.CMD_DIGITAL_MODE]
+                        print 'digital_pin_mode: Unknown output mode %s' % command[self.CMD_DIGITAL_MODE]
                         return 'okay'
             if self.check_CMD_ENABLE_DISABLE(command[self.CMD_ENABLE_DISABLE]) == 'Disable':
                 # disable pin of any type by setting it to IGNORE in the table

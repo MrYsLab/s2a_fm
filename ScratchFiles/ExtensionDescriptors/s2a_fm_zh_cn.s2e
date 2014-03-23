@@ -1,0 +1,97 @@
+﻿{
+    "extensionName": "s2a_fm - Scratch to Arduino",
+    "extensionPort": 50209,
+    "url": "https://github.com/MrYsLab/PyMata",
+    "blockSpecs": [
+        [
+            " ",
+            " 设置 %m.pin_state : 数字引脚 %n 为 %m.digital_pin_mode",
+            "digital_pin_mode",
+            "允许",
+            "引脚号",
+            "输入"
+        ],
+        [
+            " ",
+            "设置 %m.pin_state : 模拟引脚(A) %n 为 输入",
+            "analog_pin_mode",
+            "允许",
+            "引脚号"
+        ],
+        [
+            "",
+            "数字脚输出: 设置引脚 %n 为 %m.high_low",
+            "digital_write",
+            "引脚号",
+            0
+        ],
+        [
+            "",
+            "模拟输出 (PWM): 设置引脚 %n 的值为  %n",
+            "analog_write",
+            "引脚号",
+            "数量值"
+        ],
+        [
+            "",
+            "在引脚 %n 演奏 ,频率为: %n Hz ,时长为 : %n ms",
+            "play_tone",
+            "引脚号",
+            1000,
+            500
+        ],
+        [
+            "",
+            "关闭引脚 %n 的音调",
+            "tone_off",
+            "引脚号"
+        ],
+        [
+            "",
+            "设置第 %n 脚为舵机输出 转动角度为 %n",
+            "set_servo_position",
+            "引脚号",
+            90
+        ],
+        [
+            "r",
+            "读取数字脚 %n 的值",
+            "digital_read",
+            "引脚号"
+        ],
+        [
+            "r",
+            "读取模拟脚(A) %n 的值",
+            "analog_read",
+            "引脚号"
+        ],
+        [
+            "",
+            "调试 %m.off_on",
+            "debugger",
+            "关"
+        ]
+    ],
+    "menus": {
+        "pin_state": [
+            "允许",
+            "禁止"
+        ],
+        "digital_pin_mode": [
+            "输入",
+            "输出",
+            "PWM",
+            "舵机",
+            "音调",
+            "超声波"
+        ],
+        "high_low": [
+            "0",
+            "1"
+        ],
+        "off_on": [
+            "关",
+            "开"
+        ]
+    }
+}
