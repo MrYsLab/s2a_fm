@@ -10,6 +10,11 @@ Scratch? Imagine, using Scratch to control physical devices such as LEDs, motors
 monitoring devices, such as temperature sensors, potentiometers, and light sensors. What would you
 create?
 
+Want to do motor control using Snap! and Wifi? Check out our article on Physical Computing.
+http://www.instructables.com/id/The-SnapMobile-Start-Your-Physical-Computing-Engin/
+
+All the code is included here!
+
 s2a_fm is a Scratch/Snap! hardware extension written in Python allowing Scratch or Snap! and an Arduino
 micro-controller to communicate seamlessly.
 
