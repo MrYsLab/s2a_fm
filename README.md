@@ -36,7 +36,7 @@ Version 1.5 Apr 12, 2014
 ------------------------
 New Features for 1.5
 
-Portuguese and German translations of Block Text provided the generosity of
+Portuguese and German translations of Block Text provided through the generosity of
 Aldo von Wangenheim, from www.computacaonaescola.ufsc.br
 
 Version 1.4 Mar 23, 2014
