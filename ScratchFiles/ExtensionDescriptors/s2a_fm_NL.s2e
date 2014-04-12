@@ -1,5 +1,5 @@
 {
-    "extensionName": "s2a_fm - Scratch to Arduino",
+    "extensionName": "s2a_fm - Scratch voor Arduino",
     "extensionPort": 50209,
     "url": "https://github.com/MrYsLab/PyMata",
     "blockSpecs": [

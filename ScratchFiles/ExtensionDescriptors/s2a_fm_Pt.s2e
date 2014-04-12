@@ -5,93 +5,93 @@
     "blockSpecs": [
         [
             " ",
-            "%m.pin_state PIN Digital %n como %m.digital_pin_mode",
+            "%m.pin_state PINO Digital %n como %m.digital_pin_mode",
             "digital_pin_mode",
-            "Activar",
-            "PIN",
+            "Ativar",
+            "PINO",
             "Entrada"
         ],
         [
             " ",
-            "%m.pin_state PIN Analï¿½gico (A) %n como entrada",
+            "%m.pin_state PINO Analógico (A) %n como entrada",
             "analog_pin_mode",
-            "Activar",
-            "PIN"
+            "Ativar",
+            "PINO"
         ],
         [
             "",
-            "Valor Digital en PIN %n poner a %m.high_low",
+            "Valor Digital no PINO %n mudar para %m.high_low",
             "digital_write",
-            "PIN",
+            "PINO",
             0
         ],
         [
             "",
-            "Escribir valor Analï¿½gico(PWM) en Pin %n poner a %n",
+            "Escrever valor Analógico(PWM) no PINO %n mudar para a %n",
             "analog_write",
-            "PIN",
+            "PINO",
             "VAL"
         ],
         [
             "",
-            "Generar Tono en PIN: %n HZ: %n MS: %n",
+            "Gerar Som no PINO: %n HZ: %n MS: %n",
             "play_tone",
-            "PIN",
+            "PINO",
             1000,
             500
         ],
         [
             "",
-            "Apagar Tono en PIN: %n",
+            "Desligar Som no PINO: %n",
             "tone_off",
-            "PIN"
+            "PINO"
         ],
         [
             "",
-            "Mover Servo en Pin %n Grados: %n",
+            "Mover Servo no PINO %n em Graus: %n",
             "set_servo_position",
-            "PIN",
+            "PINO",
             90
         ],
         [
             "r",
-            "Leer PIN Digital %n",
+            "Ler PINO Digital %n",
             "digital_read",
-            "PIN"
+            "PINO"
         ],
         [
             "r",
-            "Leer PIN Analï¿½gico(A) %n",
+            "Ler PINO Analógico(A) %n",
             "analog_read",
-            "PIN"
+            "PINO"
         ],
         [
             "",
-            "Depurar %m.off_on",
+            "Debugar %m.off_on",
             "debugger",
-            "No"
+            "Não"
         ]
     ],
     "menus": {
         "pin_state": [
-            "Activar",
-            "Desactivar"
+            "Ativar",
+            "Desativar"
         ],
         "digital_pin_mode": [
             "Entrada",
-            "Salida",
+            "Saída",
             "PWM",
             "Servo",
-            "Tono",
-            "SONAR"
+            "Som",
+            "Ultrassom"
         ],
         "high_low": [
             "0",
             "1"
         ],
         "off_on": [
-            "No",
-            "Si"
+            "Não",
+            "Sim"
         ]
     }
 }

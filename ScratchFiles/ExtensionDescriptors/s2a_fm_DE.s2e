@@ -1,40 +1,40 @@
 {
-    "extensionName": "s2a_fm - Scratch para Arduino",
+    "extensionName": "s2a_fm - Scratch für Arduino",
     "extensionPort": 50209,
     "url": "https://github.com/MrYsLab/PyMata",
     "blockSpecs": [
         [
             " ",
-            "%m.pin_state PIN Digital %n como %m.digital_pin_mode",
+            "%m.pin_state DigitalPIN %n als %m.digital_pin_mode",
             "digital_pin_mode",
-            "Activar",
+            "Setze",
             "PIN",
-            "Entrada"
+            "Eingang"
         ],
         [
             " ",
-            "%m.pin_state PIN Analï¿½gico (A) %n como entrada",
+            "%m.pin_state AnalogPIN (A) %n als Eingang",
             "analog_pin_mode",
-            "Activar",
+            "Setze",
             "PIN"
         ],
         [
             "",
-            "Valor Digital en PIN %n poner a %m.high_low",
+            "Setze Digitalwert an PIN %n zu %m.high_low",
             "digital_write",
             "PIN",
             0
         ],
         [
             "",
-            "Escribir valor Analï¿½gico(PWM) en Pin %n poner a %n",
+            "Setze Analogwert (PWM) an PIN %n zu %n",
             "analog_write",
             "PIN",
             "VAL"
         ],
         [
             "",
-            "Generar Tono en PIN: %n HZ: %n MS: %n",
+            "Erzeuge Ton an PIN: %n HZ: %n für MS: %n",
             "play_tone",
             "PIN",
             1000,
@@ -42,56 +42,56 @@
         ],
         [
             "",
-            "Apagar Tono en PIN: %n",
+            "Schalte Ton an PIN %n aus",
             "tone_off",
             "PIN"
         ],
         [
             "",
-            "Mover Servo en Pin %n Grados: %n",
+            "Bewege Servo an PIN %n zu Position %n Grad",
             "set_servo_position",
             "PIN",
             90
         ],
         [
             "r",
-            "Leer PIN Digital %n",
+            "Lese DigitalPIN %n",
             "digital_read",
             "PIN"
         ],
         [
             "r",
-            "Leer PIN Analï¿½gico(A) %n",
+            "Lese AnalogPIN (A) %n",
             "analog_read",
             "PIN"
         ],
         [
             "",
-            "Depurar %m.off_on",
+            "Debuggen %m.off_on",
             "debugger",
-            "No"
+            "Nein"
         ]
     ],
     "menus": {
         "pin_state": [
-            "Activar",
-            "Desactivar"
+            "Setze",
+            "Deaktiviere"
         ],
         "digital_pin_mode": [
-            "Entrada",
-            "Salida",
+            "Eingang",
+            "Ausgang",
             "PWM",
             "Servo",
-            "Tono",
-            "SONAR"
+            "Ton",
+            "Ultraschall"
         ],
         "high_low": [
             "0",
             "1"
         ],
         "off_on": [
-            "No",
-            "Si"
+            "Nein",
+            "Ja"
         ]
     }
 }
