@@ -28,6 +28,7 @@ import logging
 import datetime
 import ConfigParser
 
+
 class ScratchCommandHandlers:
     """
     This class processes any command received from Scratch 2.0
@@ -88,7 +89,7 @@ class ScratchCommandHandlers:
     CMD_TONE_FREQ = 2  # frequency for tone command
     CMD_TONE_DURATION = 3  # tone duration
     CMD_SERVO_DEGREES = 2  # number of degrees for servo position
-    CMD_DEBUG = 1 # debugger on or off
+    CMD_DEBUG = 1  # debugger on or off
 
     # noinspection PyPep8Naming
     def check_CMD_ENABLE_DISABLE(self, command):
@@ -118,7 +119,6 @@ class ScratchCommandHandlers:
             return 'Off'
         if command in self.ln_ON:
             return 'On'
-    
 
     def __init__(self, firmata, com_port, total_pins_discovered, number_of_analog_pins_discovered):
         """
@@ -134,11 +134,9 @@ class ScratchCommandHandlers:
         self.first_poll_received = False
         self.debug = 0
 
-
         # Create a pin list for poll data based on the total number of pins( digital table)
         # and a pin list for the number of analog pins.
         # Pins will be marked using Firmata Pin Types
-
         for x in range(self.total_pins_discovered):
             self.digital_poll_list.append(self.firmata.IGNORE)
 
@@ -153,7 +151,7 @@ class ScratchCommandHandlers:
         @param command: This is a list containing the Scratch command and all its parameters
         @return: String to be returned to Scratch via HTTP
         """
-        method = self.command_dict.get( command[0])
+        method = self.command_dict.get(command[0])
 
         if command[0] != "poll":
             # turn on debug logging if requested
@@ -177,7 +175,7 @@ class ScratchCommandHandlers:
         @param command: This is a list containing the Scratch command and all its parameters It is unsused
         @return: 'okay'
         """
-        if not self.first_poll_received :
+        if not self.first_poll_received:
             logging.info('Scratch detected! Ready to rock and roll...')
             print 'Scratch detected! Ready to rock and roll...'
             self.first_poll_received = True
@@ -259,7 +257,7 @@ class ScratchCommandHandlers:
         @param command: Command and all possible parameters in list form
         @return: 'okay'
         """
-        if command[self.CMD_PIN_ENABLE_DISABLE] == 'PIN':
+        if not command[self.CMD_PIN_ENABLE_DISABLE].isdigit():
             logging.debug('digital_pin_mode: The pin number must be set to a numerical value')
             print 'digital_pin_mode: The pin number must be set to a numerical value'
             return 'okay'
@@ -282,10 +280,10 @@ class ScratchCommandHandlers:
                         # set the digital poll list for the pin
                         self.digital_poll_list[pin] = self.firmata.INPUT
                         # send the set request to the Arduino
-                        self.firmata.set_pin_mode( pin, self.firmata.INPUT, self.firmata.DIGITAL)
+                        self.firmata.set_pin_mode(pin, self.firmata.INPUT, self.firmata.DIGITAL)
                     else:
-                        logging.debug('digital_pin_mode: Pin %d does not support INPUT mode'% pin)
-                        print 'digital_pin_mode: Pin %d does not support INPUT mode '% pin
+                        logging.debug('digital_pin_mode: Pin %d does not support INPUT mode' % pin)
+                        print 'digital_pin_mode: Pin %d does not support INPUT mode ' % pin
                         return 'okay'
                 elif self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'SONAR':
                         # any digital input pin can be used for SONAR
@@ -301,7 +299,7 @@ class ScratchCommandHandlers:
                     if self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'Output':
                         if self.valid_digital_pin_mode_type(pin, self.firmata.OUTPUT):
                             self.digital_poll_list[pin] = self.firmata.OUTPUT
-                            self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
+                            self.firmata.set_pin_mode(pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
                         else:
                             logging.debug('digital_pin_mode: Pin %d does not support OUTPUT mode' % pin)
                             print 'digital_pin_mode: Pin %d does not support OUTPUT mode' % pin
@@ -309,7 +307,7 @@ class ScratchCommandHandlers:
                     elif self.check_CMD_DIGITAL_MODE(command[self.CMD_DIGITAL_MODE]) == 'PWM':
                         if self.valid_digital_pin_mode_type(pin, self.firmata.PWM):
                             self.digital_poll_list[pin] = self.firmata.PWM
-                            self.firmata.set_pin_mode( pin, self.firmata.PWM, self.firmata.DIGITAL)
+                            self.firmata.set_pin_mode(pin, self.firmata.PWM, self.firmata.DIGITAL)
                         else:
                             logging.debug('digital_pin_mode: Pin %d does not support PWM mode' % pin)
                             print 'digital_pin_mode: Pin %d does not support PWM mode' % pin
@@ -318,7 +316,7 @@ class ScratchCommandHandlers:
                         # Tone can be on any pin so we look for OUTPUT
                         if self.valid_digital_pin_mode_type(pin, self.firmata.OUTPUT):
                             self.digital_poll_list[pin] = self.digital_poll_list[pin] = self.firmata.TONE_TONE
-                            self.firmata.set_pin_mode( pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
+                            self.firmata.set_pin_mode(pin, self.firmata.OUTPUT, self.firmata.DIGITAL)
                         else:
                             logging.debug('digital_pin_mode: Pin %d does not support TONE mode' % pin)
                             print 'digital_pin_mode: Pin %d does not support TONE mode' % pin
@@ -361,7 +359,6 @@ class ScratchCommandHandlers:
         else:
             return False
 
-
     def analog_pin_mode(self, command):
         """
         This method will set the poll list table appropriately and
@@ -370,13 +367,12 @@ class ScratchCommandHandlers:
         @return: 'okay'
         """
 
-        if command[self.CMD_PIN_ENABLE_DISABLE] == 'PIN':
+        if not command[self.CMD_PIN_ENABLE_DISABLE].isdigit():
             logging.debug('analog_pin_mode: The pin number must be set to a numerical value')
             print 'analog_pin_mode: The pin number must be set to a numerical value'
             return 'okay'
 
         pin = int(command[self.CMD_PIN_ENABLE_DISABLE])
-
         # Normally analog pins act as inputs only, but the DUE allow analog ins
         # test for a valid pin number
         if pin >= self.number_of_analog_pins_discovered:
@@ -388,7 +384,7 @@ class ScratchCommandHandlers:
             if self.check_CMD_ENABLE_DISABLE(command[self.CMD_ENABLE_DISABLE]) == 'Enable':
                 # enable the analog pin
                 self.analog_poll_list[pin] = self.firmata.INPUT
-                self.firmata.set_pin_mode( pin, self.firmata.INPUT, self.firmata.ANALOG)  
+                self.firmata.set_pin_mode(pin, self.firmata.INPUT, self.firmata.ANALOG)
             else:
                 # Set analog poll list entry for the pin to IGNORE.
                 # Disable reporting
@@ -413,7 +409,7 @@ class ScratchCommandHandlers:
         """
         # test pin as a digital output pin in poll list table
 
-        if command[self.CMD_PIN] == 'PIN':
+        if not command[self.CMD_PIN].isdigit():
             logging.debug('digital_write: The pin number must be set to a numerical value')
             print 'digital_write: The pin number must be set to a numerical value'
             return 'okay'
@@ -421,17 +417,16 @@ class ScratchCommandHandlers:
         pin = int(command[self.CMD_PIN])
 
         if self.digital_poll_list[pin] == self.firmata.OUTPUT:
-            self.firmata.digital_write( pin, int(command[self.CMD_VALUE]))
+            self.firmata.digital_write(pin, int(command[self.CMD_VALUE]))
             return 'okay'
         # for pullup - see description above
         elif self.digital_poll_list[pin] == self.firmata.INPUT:
-            self.firmata.digital_write( pin, int(command[self.CMD_VALUE]))
+            self.firmata.digital_write(pin, int(command[self.CMD_VALUE]))
             return 'okay'
         else:
             print 'digital write: Pin %d must be enabled before writing to it.' % pin
             logging.debug('digital write: Pin %d must be enabled before writing to it.' % pin)
             return 'okay'
-
 
     def analog_write(self, command):
         """
@@ -441,15 +436,14 @@ class ScratchCommandHandlers:
         @param command: Command and all possible parameters in list form
         @return: okay or _problem
         """
-
-        if command[self.CMD_PIN] == 'PIN':
-            logging.debug('analog_write: The pin number must be set to a numerical value')
-            print 'analog_write: The pin number must be set to a numerical value'
-            return 'okay'
-
         if command[self.CMD_VALUE] == 'VAL':
             logging.debug('analog_write: The value field must be set to a numerical value')
             print 'analog_write: The value field must be set to a numerical value'
+            return 'okay'
+
+        if not command[self.CMD_PIN].isdigit():
+            logging.debug('analog_write: The pin number must be set to a numerical value')
+            print 'analog_write: The pin number must be set to a numerical value'
             return 'okay'
 
         pin = int(command[self.CMD_PIN])
@@ -478,7 +472,8 @@ class ScratchCommandHandlers:
         @param command: Command and all possible parameters in list form
         @return: okay or _problem
         """
-        if command[self.CMD_PIN] == 'PIN':
+
+        if not command[self.CMD_PIN].isdigit():
             logging.debug('play_tome: The pin number must be set to a numerical value')
             print 'play_tone: The pin number must be set to a numerical value'
             return 'okay'
@@ -503,7 +498,8 @@ class ScratchCommandHandlers:
         @param command: Command and all possible parameters in list form
         @return: okay
         """
-        if command[self.CMD_PIN] == 'PIN':
+
+        if not command[self.CMD_PIN].isdigit():
             logging.debug('tone_off: The pin number must be set to a numerical value')
             print 'tone_off: The pin number must be set to a numerical value'
             return 'okay'
@@ -538,10 +534,12 @@ class ScratchCommandHandlers:
         @param command: Command and all possible parameters in list form
         @return: okay
         """
-        if command[self.CMD_PIN] == 'PIN':
+
+        if not command[self.CMD_PIN].isdigit():
             logging.debug('servo_position: The pin number must be set to a numerical value')
             print 'servo_position: The pin number must be set to a numerical value'
             return 'okay'
+
         pin = int(command[self.CMD_PIN])
 
         if self.digital_poll_list[pin] == self.firmata.SERVO:
@@ -550,7 +548,9 @@ class ScratchCommandHandlers:
                 return 'okay'
             else:
                 print "set_servo_position: Request of %d degrees. Servo range is 0 to 180 degrees" % int(command[1])
-                logging.debug("set_servo_position: Request of %d degrees. Servo range is 0 to 180 degrees" % int(command[1]))
+                # noinspection PyPep8
+                logging.debug("set_servo_position: Request of %d degrees. Servo range is 0 to 180 degrees"
+                        % int(command[1]))
                 return 'okay'
         else:
             print 'set_servo_position: Pin %d was not enabled for SERVO operations.' % pin
@@ -572,10 +572,10 @@ class ScratchCommandHandlers:
             report_entry += self.end_of_line
             return report_entry
 
-    def analog_read(self,command):
+    def analog_read(self, command):
         """
         This method retrieves analog input information for Snap!
-        @param command: Command and all possible parameters in list form
+        @param: command: Command and all possible parameters in list form
         @return: Current value of analog input pin
         """
         analog_response_table = self.firmata.get_analog_response_table()
@@ -590,9 +590,9 @@ class ScratchCommandHandlers:
     # This table must be at the bottom of the file because Python does not provide forward referencing for
     # the methods defined above.
     command_dict = {'crossdomain.xml': send_cross_domain_policy, 'reset_all': reset_arduino,
-                        'digital_pin_mode': digital_pin_mode,  "analog_pin_mode": analog_pin_mode,
-                        "digital_write": digital_write, "analog_write": analog_write,
-                        "play_tone": play_tone, "tone_off": tone_off,
-                        "set_servo_position": set_servo_position, "poll": poll,
-                        "debugger": debug_control,  "digital_read": digital_read, "analog_read":analog_read
-                        }
+                    'digital_pin_mode': digital_pin_mode,  'analog_pin_mode': analog_pin_mode,
+                    'digital_write': digital_write, 'analog_write': analog_write,
+                    'play_tone': play_tone, 'tone_off': tone_off,
+                    'set_servo_position': set_servo_position, 'poll': poll,
+                    'debugger': debug_control,  'digital_read': digital_read, 'analog_read': analog_read
+                    }

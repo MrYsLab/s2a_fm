@@ -73,7 +73,6 @@ class GetHandler(BaseHTTPRequestHandler):
         (This may change when Scratch is converted to HTML 5
         """
 
-
         # skip over the / in the command
         cmd = self.path[1:]
         # create a list containing the command and all of its parameters
@@ -84,7 +83,6 @@ class GetHandler(BaseHTTPRequestHandler):
 
         s = self.command_handler.do_command(cmd_list)
 
-
         # if pin was not enabled for reporter block, a "NoneType" can be returned by the command_handler
         if (s is None) or (len(s) == 0):
 
@@ -94,7 +92,6 @@ class GetHandler(BaseHTTPRequestHandler):
             return
         else:
             self.send_resp(s)
-
 
     # we can't use the standard send_response since we don't conform to its
     # standards, so we craft our own response handler here
@@ -115,6 +112,7 @@ class GetHandler(BaseHTTPRequestHandler):
             http_response += str(response + crlf)
         # send it out the door to Scratch
         self.wfile.write(http_response)
+
 
 def start_server(firmata, command_handler):
     """

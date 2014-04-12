@@ -53,14 +53,14 @@ def s2a_fm():
 
     # turn on logging
     logging.basicConfig(filename='./log/s2a_fm_debugging.log', filemode='w', level=logging.DEBUG)
-    logging.info('s2a_fm version 1.4    Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved ')
-    print 's2a_fm version 1.4   Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved '
+    logging.info('s2a_fm version 1.5    Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved ')
+    print 's2a_fm version 1.5   Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved '
 
     # get the com_port from the command line or default if none given
     # if user specified the com port on the command line, use that when invoking PyMata,
     # else use '/dev/ttyACM0'
     if len(sys.argv) == 2:
-        com_port= str(sys.argv[1])
+        com_port = str(sys.argv[1])
     else:
         com_port = '/dev/ttyACM0'
     logging.info('com port = %s' % com_port)
@@ -92,8 +92,7 @@ def s2a_fm():
                 number_of_analog_pins_discovered += 1
 
     # log the number of pins found
-    logging.info('%d Total Pins and %d Analog Pins Found' % (total_pins_discovered,
-                                                     number_of_analog_pins_discovered))
+    logging.info('%d Total Pins and %d Analog Pins Found' % (total_pins_discovered, number_of_analog_pins_discovered))
 
     # instantiate the command handler
     scratch_command_handler = ScratchCommandHandlers(firmata, com_port, total_pins_discovered,
@@ -111,7 +110,6 @@ def s2a_fm():
             # keep sending out a capability query until there is a response
         pin_capability = firmata.get_capability_query_results()
         time.sleep(.1)
-
 
     # we've got the capability, now build a dictionary with pin as the key and a list of all the capabilities
     # for the pin as the key's value

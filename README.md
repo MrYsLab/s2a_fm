@@ -1,6 +1,8 @@
 s2a_fm
 ======
 
+![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/scratch_langs.png)
+
 Arduino users! Would you like to configure and control your Arduino micro-controller without having
 to write a single line of Arduino sketch code and at the same time have access to a graphical user
 interface?
@@ -29,6 +31,13 @@ Installation Instructions
 --------------------------
 The s2a_fm Reference Manual, s2a_fm_reference.pdf, located in the documentation directory of this distribution,
 provides full installation instructions
+
+Version 1.5 Apr 12, 2014
+------------------------
+New Features for 1.5
+
+Portuguese and German translations of Block Text provided the generosity of
+Aldo von Wangenheim, from www.computacaonaescola.ufsc.br
 
 Version 1.4 Mar 23, 2014
 -----------------------
@@ -78,17 +87,12 @@ None.
 
 Known Scratch 2.0 Extension Issues
 ------------
+All previous major issues have been resolved as of version 404 of the Off-Line editor.
 
-A.  The current version of Scratch 2.0 does not properly restart a Scratch program when clicking the red stop button
-and pressing the green start flag again.
+There is one known issue, and that is when the Green Flag is clicked, the Scratch script(s) starts
+running before parts of Scratch are ready to communicate with the hardware extension.
 
-             Workarounds: 1. Close Scratch and reopen it.
-                          2. Click the When (Green Flag) Clicked block in the editor.
-
-B. Placing a Scratch Extension Command Block in a loop construct causes the loop to execute once and then abort.
-
-             Workaround: Either write scripts in a linear fashion or use broadcast messages to
-             execute the extension command block.
+The workaround: Place a 3 second wait block below all When Green Flag Clicked hat blocks.
 
 Scratch s2a_fm Extension Blocks
 -------------------------------
