@@ -89,10 +89,7 @@ Known Scratch 2.0 Extension Issues
 ------------
 All previous major issues have been resolved as of version 404 of the Off-Line editor.
 
-There is one known issue, and that is when the Green Flag is clicked, the Scratch script(s) starts
-running before parts of Scratch are ready to communicate with the hardware extension.
-
-The workaround: Place a 3 second wait block below all When Green Flag Clicked hat blocks.
+None.
 
 Scratch s2a_fm Extension Blocks
 -------------------------------
