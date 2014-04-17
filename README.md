@@ -22,7 +22,7 @@ micro-controller to communicate seamlessly.
 
 Program Block translations are included for Chinese, Dutch, English (default) French, and Spanish.
 
-Make sure you get the latest version of the Scratch Off-Line editor if you are using Scratch.
+Make sure you get the latest version of the Scratch Off-Line editor if you are using Scratch (version 404 or greater).
 
 Check Out Our Blog
 ------------------
