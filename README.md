@@ -24,8 +24,9 @@ Program Block translations are included for Chinese, Dutch, English (default) Fr
 
 Make sure you get the latest version of the Scratch Off-Line editor if you are using Scratch.
 
-At this point in time, Snap! has a more stable hardware interface than Scratch, so it is recommended for use.
-
+Check Out Our Blog
+------------------
+http://mryslab.blogspot.com/
 
 Installation Instructions
 --------------------------
