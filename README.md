@@ -40,6 +40,8 @@ New Features for 1.5
 Portuguese and German translations of Block Text provided through the generosity of
 Aldo von Wangenheim, from www.computacaonaescola.ufsc.br
 
+A Chinese translation of the reference manual was graciously provided by Yufangjun 发自我的小米手机
+
 Version 1.4 Mar 23, 2014
 -----------------------
 New Feature for 1.4
