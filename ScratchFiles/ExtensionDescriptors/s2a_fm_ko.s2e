@@ -1,0 +1,97 @@
+﻿{
+    "extensionName": "스크래치2&아두이노",
+    "extensionPort": 50209,
+    "url": "https://github.com/MrYsLab/PyMata",
+    "blockSpecs": [
+        [
+            " ",
+            "%m.pin_state : 디지털 %n 번핀 / %m.digital_pin_mode 모드",
+            "digital_pin_mode",
+            "사용",
+            "0",
+            "입력"
+        ],
+        [
+            " ",
+            "%m.pin_state : 아날로그 %n 번핀",
+            "analog_pin_mode",
+            "사용",
+            "0"
+        ],
+        [
+            "",
+            "디지털 %n 번핀에 %m.high_low 보내기",
+            "digital_write",
+            "0",
+            "0"
+        ],
+        [
+            "",
+            "디지털(전류조절) %n 번핀에 %n 보내기",
+            "analog_write",
+            "0",
+            "0"
+        ],
+        [
+            "",
+            "신호음 %n 번핀에서 %n 주파수로 %n 동안 재생하기",
+            "play_tone",
+            "0",
+            "HZ",
+            "ms"
+        ],
+        [
+            "",
+            "%n 번핀의 신호음 끄기",
+            "tone_off",
+            "0"
+        ],
+        [
+            "",
+            "서보모터 %n 번핀을 %n ° 만큼 회전시키기",
+            "set_servo_position",
+            "0",
+            90
+        ],
+        [
+            "r",
+            "디지털 %n 번핀 값 읽어오기",
+            "digital_read",
+            "0"
+        ],
+        [
+            "r",
+            "아날로그 %n 번핀 값 읽어보기",
+            "analog_read",
+            "0"
+        ],
+        [
+            "",
+            "디버거 %m.off_on",
+            "debugger",
+            "끄기"
+        ]
+    ],
+    "menus": {
+        "pin_state": [
+            "사용",
+            "미사용"
+        ],
+        "digital_pin_mode": [
+            "입력",
+            "출력",
+            "전류조절",
+            "서보모터",
+            "신호음",
+            "음파탐지"
+        ],
+        "high_low": [
+            "0",
+            "1"
+        ],
+        "off_on": [
+            "끄기",
+            "켜기"
+        ]
+    }
+}
