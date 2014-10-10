@@ -33,6 +33,10 @@ Installation Instructions
 The s2a_fm Reference Manual, s2a_fm_reference.pdf, located in the documentation directory of this distribution,
 provides full installation instructions
 
+New Language Translation October 9, 2014
+------------------------
+Taiwanese translation provided through the courtesy of Hsu Jen-Chieh.
+
 Version 1.5 Apr 12, 2014
 ------------------------
 New Features for 1.5
