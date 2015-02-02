@@ -1,7 +1,9 @@
 s2a_fm
 ======
+<p align="center">
+  <img src="https://raw.github.com/MrYsLab/s2a_fm/master/documentation/scratch_langs.png?raw=true" alt="Sublime's custom image"/>
+</p>
 
-![ScreenShot](https://raw.github.com/MrYsLab/s2a_fm/master/documentation/scratch_langs.png)
 
 Arduino users! Would you like to configure and control your Arduino micro-controller without having
 to write a single line of Arduino sketch code and at the same time have access to a graphical user
