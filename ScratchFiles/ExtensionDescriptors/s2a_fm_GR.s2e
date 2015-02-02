@@ -1,0 +1,97 @@
+{
+    "extensionName": "s2a_fm - Scratch για το Arduino",
+    "extensionPort": 50209,
+    "url": "https://github.com/MrYsLab/PyMata",
+    "blockSpecs": [
+        [
+            " ",
+            "%m.pin_state Ψηφιακό PIN %n για %m.digital_pin_mode",
+            "digital_pin_mode",
+            "Ενεργοποίηση",
+            "PIN",
+            "Είσοδο"
+        ],
+        [
+            " ",
+            "%m.pin_state Αναλογικό PIN (A) %n για Είσοδο",
+            "analog_pin_mode",
+            "Ενεργοποίηση",
+            "PIN"
+        ],
+        [
+            "",
+            "Ψηφιακή Εγγραφή όρισε Pin %n σε %m.high_low",
+            "digital_write",
+            "PIN",
+            0
+        ],
+        [
+            "",
+            "Αναλογική Εγγραφή (PWM) όρισε Pin %n σε %n",
+            "analog_write",
+            "PIN",
+            "VAL"
+        ],
+        [
+            "",
+            "Παίξε τόνο στο Pin: %n HZ: %n για ms: %n",
+            "play_tone",
+            "PIN",
+            1000,
+            500
+        ],
+        [
+            "",
+            "Σταμάτησε τόνο στο Pin: %n",
+            "tone_off",
+            "PIN"
+        ],
+        [
+            "",
+            "Μετακίνησε το Σέρβο στο Pin %n κατά μοίρες: %n",
+            "set_servo_position",
+            "PIN",
+            90
+        ],
+        [
+            "r",
+            "Διάβασε Ψηφιακή Είσοδο στο Pin %n",
+            "digital_read",
+            "PIN"
+        ],
+        [
+            "r",
+            "Διάβασε Αναλογική Είσοδο στο Pin (A) %n",
+            "analog_read",
+            "PIN"
+        ],
+        [
+            "",
+            "Αποσφαλματωτής %m.off_on",
+            "debugger",
+            "Κλείσιμο"
+        ]
+    ],
+    "menus": {
+        "pin_state": [
+            "Ενεργοποίηση",
+            "Απενεργοποίηση"
+        ],
+        "digital_pin_mode": [
+            "Είσοδο",
+            "Έξοδο",
+            "PWM",
+            "Σέρβο",
+            "Τόνος",
+            "Σόναρ"
+        ],
+        "high_low": [
+            "0",
+            "1"
+        ],
+        "off_on": [
+            "Κλείσιμο",
+            "Άνοιγμα"
+        ]
+    }
+}
