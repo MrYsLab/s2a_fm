@@ -22,7 +22,7 @@ All the code is included here!
 s2a_fm is a Scratch/Snap! hardware extension written in Python allowing Scratch or Snap! and an Arduino
 micro-controller to communicate seamlessly.
 
-Program Block translations are included for Chinese, Dutch, English (default), French, German, Korean, Portuguese, and Spanish.
+Program Block translations are included for Chinese, Dutch, English (default), French, German, Greek, Italian, Korean, Portuguese, and Spanish, Taiwanese.
 
 Make sure you get the latest version of the Scratch Off-Line editor if you are using Scratch (version 404 or greater).
 
