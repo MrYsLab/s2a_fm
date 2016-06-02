@@ -1,5 +1,7 @@
 s2a_fm
 ======
+
+[![Join the chat at https://gitter.im/MrYsLab/s2a_fm](https://badges.gitter.im/MrYsLab/s2a_fm.svg)](https://gitter.im/MrYsLab/s2a_fm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <p align="center">
   <img src="https://raw.github.com/MrYsLab/s2a_fm/master/documentation/scratch_langs.png?raw=true" alt="Sublime's custom image"/>
 </p>
