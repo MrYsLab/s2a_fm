@@ -346,6 +346,16 @@ class ScratchCommandHandlers:
             # normal http return for commands
             return 'okay'
 
+    def digital_pin_mode_ja(self, command_ja):
+        """
+        This method will call digital_pin_mode after reordering
+        command arguments (from Japanese order to English order).
+        @param command: Command and all possible parameters in list form
+        @return: 'okay'
+        """
+        command = ['digital_pin_mode'] + [command_ja[i] for i in [3, 1, 2]]
+        return self.digital_pin_mode(command)
+
     def valid_digital_pin_mode_type(self, pin, pin_mode):
         """
         This is a utility method to determine if the pin supports the pin mode
@@ -392,6 +402,16 @@ class ScratchCommandHandlers:
                 self.firmata.disable_analog_reporting(pin)  
 
         return 'okay'
+
+    def analog_pin_mode_ja(self, command_ja):
+        """
+        This method will call analog_pin_mode after reordering
+        command arguments (from Japanese order to English order).
+        @param command: Command and all possible parameters in list form
+        @return: 'okay'
+        """
+        command = ['analog_pin_mode'] + [command_ja[i] for i in [2, 1]]
+        return self.analog_pin_mode(command)
 
     def digital_write(self, command):
         """
@@ -591,6 +611,8 @@ class ScratchCommandHandlers:
     # the methods defined above.
     command_dict = {'crossdomain.xml': send_cross_domain_policy, 'reset_all': reset_arduino,
                     'digital_pin_mode': digital_pin_mode,  'analog_pin_mode': analog_pin_mode,
+                    'digital_pin_mode_ja': digital_pin_mode_ja,
+                    'analog_pin_mode_ja': analog_pin_mode_ja,
                     'digital_write': digital_write, 'analog_write': analog_write,
                     'play_tone': play_tone, 'tone_off': tone_off,
                     'set_servo_position': set_servo_position, 'poll': poll,
