@@ -1,0 +1,97 @@
+{
+    "extensionName": "s2a_fm - アルドゥイーノ用スクラッチ",
+    "extensionPort": 50209,
+    "url": "https://github.com/MrYsLab/PyMata",
+    "blockSpecs": [
+        [
+            " ",
+            "%n 番目のデジタルピンを %m.digital_pin_mode として %m.pin_state にする",
+            "digital_pin_mode_ja",
+            "1",
+            "入力",
+            "有効"
+        ],
+        [
+            " ",
+            "%n 番目のアナログピンを入力として %m.pin_state にする",
+            "analog_pin_mode_ja",
+            "1",
+            "有効"
+        ],
+        [
+            "",
+            "%n 番目のデジタルピンを %m.high_low に設定する",
+            "digital_write",
+            "1",
+            0
+        ],
+        [
+            "",
+            "%n 番目のPWMピンに %n と言う値を書き込む",
+            "analog_write",
+            "1",
+            "10"
+        ],
+        [
+            "",
+            "%n 番目のピンに次の音を鳴らす、周波数： %n ハーツ、長さ： %n ミリ秒",
+            "play_tone",
+            "1",
+            1000,
+            500
+        ],
+        [
+            "",
+            "%n 番目のピンで音を止める",
+            "tone_off",
+            "1"
+        ],
+        [
+            "",
+            "%n 番目のピンのサーボモーターを %n 度で回す",
+            "set_servo_position",
+            "1",
+            90
+        ],
+        [
+            "r",
+            "%n 番目のデジタルピンの状態",
+            "digital_read",
+            "1"
+        ],
+        [
+            "r",
+            "%n 番目のアナログピンの値",
+            "analog_read",
+            "1"
+        ],
+        [
+            "",
+            "デバッガーを %m.off_on",
+            "debugger",
+            "止める"
+        ]
+    ],
+    "menus": {
+        "pin_state": [
+            "有効",
+            "無効"
+        ],
+        "digital_pin_mode": [
+            "入力",
+            "出力",
+            "PWM波",
+            "サーボモーターの回転",
+            "音声出力",
+            "超音波の距離測定"
+        ],
+        "high_low": [
+            "0",
+            "1"
+        ],
+        "off_on": [
+            "止める",
+            "動かす"
+        ]
+    }
+}
