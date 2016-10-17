@@ -38,6 +38,10 @@ Installation Instructions
 The s2a_fm Reference Manual, s2a_fm_reference.pdf, located in the documentation directory of this distribution,
 provides full installation instructions
 
+Japanese Block Translation Oct 17 2016
+--------------------------------------
+Tranlations provided through the generosity of Antoine Choppin
+
 Greek Block Translation Feb 3, 2015
 -----------------------------------
 Translations provided through the generosity of Alexandros Moskofidis
