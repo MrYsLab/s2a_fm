@@ -40,7 +40,7 @@ provides full installation instructions
 
 Japanese Block Translation Oct 17 2016
 --------------------------------------
-Tranlations provided through the generosity of Antoine Choppin
+Translations provided through the generosity of Antoine Choppin
 
 Greek Block Translation Feb 3, 2015
 -----------------------------------
