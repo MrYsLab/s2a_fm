@@ -1,0 +1,97 @@
+{
+    "extensionName": "s2a_fm - Arduino",
+    "extensionPort": 50209,
+    "url": "https://github.com/MrYsLab/PyMata",
+    "blockSpecs": [
+        [
+            " ",
+            "デジタルピン %n を %m.digital_pin_mode に %m.pin_state",
+            "digital_pin_mode_ja",
+            "1",
+            "入力",
+            "使う"
+        ],
+        [
+            " ",
+            "アナログピン %n を入力に %m.pin_state",
+            "analog_pin_mode_ja",
+            "1",
+            "使う"
+        ],
+        [
+            "",
+            "デジタルピン %n を %m.high_low にする",
+            "digital_write",
+            "1",
+            0
+        ],
+        [
+            "",
+            "PWMピン %n を値 %n にする",
+            "analog_write",
+            "1",
+            "10"
+        ],
+        [
+            "",
+            "ピン %n の音を鳴らす: %n Hz, %n ミリ秒",
+            "play_tone",
+            "1",
+            1000,
+            500
+        ],
+        [
+            "",
+            "ピン %n の音を止める",
+            "tone_off",
+            "1"
+        ],
+        [
+            "",
+            "ピン %n のサーボを %n 度にする",
+            "set_servo_position",
+            "1",
+            90
+        ],
+        [
+            "r",
+            "デジタルピン %n の状態",
+            "digital_read",
+            "1"
+        ],
+        [
+            "r",
+            "アナログピン %n の値",
+            "analog_read",
+            "1"
+        ],
+        [
+            "",
+            "デバッガーを %m.off_on",
+            "debugger",
+            "止める"
+        ]
+    ],
+    "menus": {
+        "pin_state": [
+            "使う",
+            "使わない"
+        ],
+        "digital_pin_mode": [
+            "入力",
+            "出力",
+            "PWM",
+            "サーボ",
+            "音",
+            "ソナー"
+        ],
+        "high_low": [
+            "0",
+            "1"
+        ],
+        "off_on": [
+            "止める",
+            "動かす"
+        ]
+    }
+}
