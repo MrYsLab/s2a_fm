@@ -36,7 +36,11 @@ http://mryslab.blogspot.com/
 Installation Instructions
 --------------------------
 The s2a_fm Reference Manual, s2a_fm_reference.pdf, located in the documentation directory of this distribution,
-provides full installation instructions
+provides full installation instructions.
+
+Alternative Japanese Block Translation May 30, 2017
+--------------------------------------
+Translations provided through the generosity of Hiroaki Kawashima
 
 Japanese Block Translation Oct 17 2016
 --------------------------------------
