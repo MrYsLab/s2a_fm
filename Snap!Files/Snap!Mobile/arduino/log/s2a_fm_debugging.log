@@ -1,5 +1,0 @@
-INFO:root:s2a_fm version 1.2    Copyright(C) 2013-14 Alan Yorinks    All Rights Reserved 
-INFO:root:com port = /dev/ttyATH0
-INFO:root:30 Total Pins and 12 Analog Pins Found
-INFO:root:scratch_http_server.py: keyboard interrupt exception
-INFO:root:s2a_fm.py: keyboard interrupt exception
